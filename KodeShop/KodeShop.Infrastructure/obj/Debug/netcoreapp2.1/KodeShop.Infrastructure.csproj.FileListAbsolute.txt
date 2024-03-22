@@ -1,0 +1,8 @@
+D:\pya.h\ASP.NET\KodeShop\KodeShop.Infrastructure\bin\Debug\netcoreapp2.1\KodeShop.Infrastructure.deps.json
+D:\pya.h\ASP.NET\KodeShop\KodeShop.Infrastructure\bin\Debug\netcoreapp2.1\KodeShop.Infrastructure.dll
+D:\pya.h\ASP.NET\KodeShop\KodeShop.Infrastructure\bin\Debug\netcoreapp2.1\KodeShop.Infrastructure.pdb
+D:\pya.h\ASP.NET\KodeShop\KodeShop.Infrastructure\obj\Debug\netcoreapp2.1\KodeShop.Infrastructure.csproj.CoreCompileInputs.cache
+D:\pya.h\ASP.NET\KodeShop\KodeShop.Infrastructure\obj\Debug\netcoreapp2.1\KodeShop.Infrastructure.AssemblyInfoInputs.cache
+D:\pya.h\ASP.NET\KodeShop\KodeShop.Infrastructure\obj\Debug\netcoreapp2.1\KodeShop.Infrastructure.AssemblyInfo.cs
+D:\pya.h\ASP.NET\KodeShop\KodeShop.Infrastructure\obj\Debug\netcoreapp2.1\KodeShop.Infrastructure.dll
+D:\pya.h\ASP.NET\KodeShop\KodeShop.Infrastructure\obj\Debug\netcoreapp2.1\KodeShop.Infrastructure.pdb

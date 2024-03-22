@@ -1,0 +1,9 @@
+D:\pya.h\ASP.NET\KodeShop\KodeShop.DataLayer\bin\Debug\netcoreapp2.1\KodeShop.DataLayer.deps.json
+D:\pya.h\ASP.NET\KodeShop\KodeShop.DataLayer\bin\Debug\netcoreapp2.1\KodeShop.DataLayer.dll
+D:\pya.h\ASP.NET\KodeShop\KodeShop.DataLayer\bin\Debug\netcoreapp2.1\KodeShop.DataLayer.pdb
+D:\pya.h\ASP.NET\KodeShop\KodeShop.DataLayer\obj\Debug\netcoreapp2.1\KodeShop.DataLayer.csprojAssemblyReference.cache
+D:\pya.h\ASP.NET\KodeShop\KodeShop.DataLayer\obj\Debug\netcoreapp2.1\KodeShop.DataLayer.csproj.CoreCompileInputs.cache
+D:\pya.h\ASP.NET\KodeShop\KodeShop.DataLayer\obj\Debug\netcoreapp2.1\KodeShop.DataLayer.AssemblyInfoInputs.cache
+D:\pya.h\ASP.NET\KodeShop\KodeShop.DataLayer\obj\Debug\netcoreapp2.1\KodeShop.DataLayer.AssemblyInfo.cs
+D:\pya.h\ASP.NET\KodeShop\KodeShop.DataLayer\obj\Debug\netcoreapp2.1\KodeShop.DataLayer.dll
+D:\pya.h\ASP.NET\KodeShop\KodeShop.DataLayer\obj\Debug\netcoreapp2.1\KodeShop.DataLayer.pdb
