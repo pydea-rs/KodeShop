@@ -6,3 +6,15 @@ D:\pya.h\ASP.NET\KodeShop\KodeShop.Infrastructure\obj\Debug\netcoreapp2.1\KodeSh
 D:\pya.h\ASP.NET\KodeShop\KodeShop.Infrastructure\obj\Debug\netcoreapp2.1\KodeShop.Infrastructure.AssemblyInfo.cs
 D:\pya.h\ASP.NET\KodeShop\KodeShop.Infrastructure\obj\Debug\netcoreapp2.1\KodeShop.Infrastructure.dll
 D:\pya.h\ASP.NET\KodeShop\KodeShop.Infrastructure\obj\Debug\netcoreapp2.1\KodeShop.Infrastructure.pdb
+D:\Portfolio\pydea.go\fullstack\ASP.NET\KodeShop\KodeShop\KodeShop.Infrastructure\bin\Debug\netcoreapp2.1\KodeShop.Infrastructure.deps.json
+D:\Portfolio\pydea.go\fullstack\ASP.NET\KodeShop\KodeShop\KodeShop.Infrastructure\bin\Debug\netcoreapp2.1\KodeShop.Infrastructure.dll
+D:\Portfolio\pydea.go\fullstack\ASP.NET\KodeShop\KodeShop\KodeShop.Infrastructure\bin\Debug\netcoreapp2.1\KodeShop.Infrastructure.pdb
+D:\Portfolio\pydea.go\fullstack\ASP.NET\KodeShop\KodeShop\KodeShop.Infrastructure\bin\Debug\netcoreapp2.1\KodeShop.DataLayer.dll
+D:\Portfolio\pydea.go\fullstack\ASP.NET\KodeShop\KodeShop\KodeShop.Infrastructure\bin\Debug\netcoreapp2.1\KodeShop.DataLayer.pdb
+D:\Portfolio\pydea.go\fullstack\ASP.NET\KodeShop\KodeShop\KodeShop.Infrastructure\obj\Debug\netcoreapp2.1\KodeShop.Infrastructure.csproj.AssemblyReference.cache
+D:\Portfolio\pydea.go\fullstack\ASP.NET\KodeShop\KodeShop\KodeShop.Infrastructure\obj\Debug\netcoreapp2.1\KodeShop.Infrastructure.AssemblyInfoInputs.cache
+D:\Portfolio\pydea.go\fullstack\ASP.NET\KodeShop\KodeShop\KodeShop.Infrastructure\obj\Debug\netcoreapp2.1\KodeShop.Infrastructure.AssemblyInfo.cs
+D:\Portfolio\pydea.go\fullstack\ASP.NET\KodeShop\KodeShop\KodeShop.Infrastructure\obj\Debug\netcoreapp2.1\KodeShop.Infrastructure.csproj.CoreCompileInputs.cache
+D:\Portfolio\pydea.go\fullstack\ASP.NET\KodeShop\KodeShop\KodeShop.Infrastructure\obj\Debug\netcoreapp2.1\KodeShop.Infrastructure.csproj.CopyComplete
+D:\Portfolio\pydea.go\fullstack\ASP.NET\KodeShop\KodeShop\KodeShop.Infrastructure\obj\Debug\netcoreapp2.1\KodeShop.Infrastructure.dll
+D:\Portfolio\pydea.go\fullstack\ASP.NET\KodeShop\KodeShop\KodeShop.Infrastructure\obj\Debug\netcoreapp2.1\KodeShop.Infrastructure.pdb

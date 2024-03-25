@@ -7,3 +7,12 @@ D:\pya.h\ASP.NET\KodeShop\KodeShop.DataLayer\obj\Debug\netcoreapp2.1\KodeShop.Da
 D:\pya.h\ASP.NET\KodeShop\KodeShop.DataLayer\obj\Debug\netcoreapp2.1\KodeShop.DataLayer.AssemblyInfo.cs
 D:\pya.h\ASP.NET\KodeShop\KodeShop.DataLayer\obj\Debug\netcoreapp2.1\KodeShop.DataLayer.dll
 D:\pya.h\ASP.NET\KodeShop\KodeShop.DataLayer\obj\Debug\netcoreapp2.1\KodeShop.DataLayer.pdb
+D:\Portfolio\pydea.go\fullstack\ASP.NET\KodeShop\KodeShop\KodeShop.DataLayer\bin\Debug\netcoreapp2.1\KodeShop.DataLayer.deps.json
+D:\Portfolio\pydea.go\fullstack\ASP.NET\KodeShop\KodeShop\KodeShop.DataLayer\bin\Debug\netcoreapp2.1\KodeShop.DataLayer.dll
+D:\Portfolio\pydea.go\fullstack\ASP.NET\KodeShop\KodeShop\KodeShop.DataLayer\bin\Debug\netcoreapp2.1\KodeShop.DataLayer.pdb
+D:\Portfolio\pydea.go\fullstack\ASP.NET\KodeShop\KodeShop\KodeShop.DataLayer\obj\Debug\netcoreapp2.1\KodeShop.DataLayer.csproj.AssemblyReference.cache
+D:\Portfolio\pydea.go\fullstack\ASP.NET\KodeShop\KodeShop\KodeShop.DataLayer\obj\Debug\netcoreapp2.1\KodeShop.DataLayer.AssemblyInfoInputs.cache
+D:\Portfolio\pydea.go\fullstack\ASP.NET\KodeShop\KodeShop\KodeShop.DataLayer\obj\Debug\netcoreapp2.1\KodeShop.DataLayer.AssemblyInfo.cs
+D:\Portfolio\pydea.go\fullstack\ASP.NET\KodeShop\KodeShop\KodeShop.DataLayer\obj\Debug\netcoreapp2.1\KodeShop.DataLayer.csproj.CoreCompileInputs.cache
+D:\Portfolio\pydea.go\fullstack\ASP.NET\KodeShop\KodeShop\KodeShop.DataLayer\obj\Debug\netcoreapp2.1\KodeShop.DataLayer.dll
+D:\Portfolio\pydea.go\fullstack\ASP.NET\KodeShop\KodeShop\KodeShop.DataLayer\obj\Debug\netcoreapp2.1\KodeShop.DataLayer.pdb

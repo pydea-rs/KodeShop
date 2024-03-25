@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
-using KodeShop.DataLayer.Context;
+using KodeShop.DataLayer.Contexts;
 
 namespace KodeShop.Infrustructure.Utilities.Extensions.Connection
 {

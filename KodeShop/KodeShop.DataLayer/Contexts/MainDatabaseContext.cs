@@ -4,7 +4,7 @@ using KodeShop.DataLayer.Entities.Account;
 using KodeShop.DataLayer.Entities.Access;
 
 
-namespace KodeShop.DataLayer.Context
+namespace KodeShop.DataLayer.Contexts
 {
     public class MainDatabaseContext : DbContext
     {
