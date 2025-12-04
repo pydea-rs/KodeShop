@@ -23,16 +23,35 @@ class PostBase(models.Model):
 class BlogPost(PostBase):
     thumbnail = models.ImageField(upload_to='posts/blogs', blank=True, null=True, verbose_name='تصویر')
     body = CKEditor5Field('متن پست', config_name='default')
+    slug = models.SlugField(max_length=256, unique=True, blank=True, verbose_name='اسلاگ', help_text="URL-friendly version")
+    
+    # SEO fields
+    meta_title = models.CharField(max_length=60, blank=True, verbose_name="عنوان SEO")
+    meta_description = models.CharField(max_length=160, blank=True, verbose_name="توضیحات SEO")
+    focus_keyword = models.CharField(max_length=100, blank=True, verbose_name="کلمه کلیدی اصلی")
 
     class Meta:
         verbose_name = 'پست بلاگ'
         verbose_name_plural = 'پست بلاگ'
 
     def url(self):
-        return reverse('blog_post', args=[self.id])
+        return reverse('blog_post', args=[self.slug if self.slug else self.id])
 
     def get_absolute_url(self):
         return self.url()
+    
+    def save(self, *args, **kwargs):
+        # Auto-generate slug if not provided
+        if not self.slug:
+            from django.utils.text import slugify
+            base_slug = slugify(self.title, allow_unicode=True)
+            slug = base_slug
+            counter = 1
+            while BlogPost.objects.filter(slug=slug).exists():
+                slug = f"{base_slug}-{counter}"
+                counter += 1
+            self.slug = slug
+        super().save(*args, **kwargs)
 
 
 class VideoQualityEnum(Enum):

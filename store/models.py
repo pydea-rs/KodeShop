@@ -9,7 +9,7 @@ from django.db.models import Avg, Count
 class Product(models.Model):
     name = models.CharField(max_length=64, unique=True, blank=False, verbose_name="نام به انگلیسی")
     name_fa = models.CharField(max_length=64, unique=True, blank=False, verbose_name="نام")
-    slug = models.SlugField(max_length=64, unique=True, verbose_name="اسلاگ")
+    slug = models.SlugField(max_length=64, unique=True, verbose_name="اسلاگ", help_text="URL-friendly version of name")
     description = models.TextField(max_length=1024, blank=True, verbose_name="مشخصات")
     price = models.IntegerField(verbose_name="قیمت")
     stock = models.IntegerField(verbose_name="موجودی")
@@ -20,6 +20,10 @@ class Product(models.Model):
     # below line delete all products associated when the category deletes!! expected?
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name="دسته بندی")
     image = models.ImageField(upload_to='photos/products', verbose_name="تصویر")
+    
+    # SEO fields
+    meta_title = models.CharField(max_length=60, blank=True, verbose_name="عنوان SEO", help_text="Leave blank to auto-generate")
+    meta_description = models.CharField(max_length=160, blank=True, verbose_name="توضیحات SEO", help_text="Leave blank to auto-generate")
 
     class Meta:
         verbose_name = "کالا"

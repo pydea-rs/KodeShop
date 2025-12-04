@@ -1,0 +1,55 @@
+{% load seo_tags %}
+{% load static %}
+
+<!-- Primary Meta Tags -->
+<meta name="title" content="{{ meta_title|default:page_title|default:APP_NAME }}">
+<meta name="description" content="{{ meta_description|default:APP_DESCRIPTION|truncate_seo:160 }}">
+{% if meta_keywords %}<meta name="keywords" content="{{ meta_keywords }}">{% endif %}
+
+<!-- Canonical URL -->
+<link rel="canonical" href="{{ canonical_url|default:page_url }}">
+
+<!-- Robots Meta -->
+{% if noindex or seo_data.noindex %}
+<meta name="robots" content="noindex{% if nofollow or seo_data.nofollow %}, nofollow{% endif %}">
+{% else %}
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+{% endif %}
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="{{ og_type|default:'website' }}">
+<meta property="og:url" content="{{ page_url }}">
+<meta property="og:title" content="{{ og_title|default:meta_title|default:page_title }}">
+<meta property="og:description" content="{{ og_description|default:meta_description|default:APP_DESCRIPTION|truncate_seo:200 }}">
+{% if og_image %}
+<meta property="og:image" content="{{ og_image }}">
+{% elif seo_data.og_image %}
+<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ seo_data.og_image.url }}">
+{% endif %}
+<meta property="og:locale" content="fa_IR">
+<meta property="og:site_name" content="{{ APP_NAME }}">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="{{ page_url }}">
+<meta name="twitter:title" content="{{ twitter_title|default:meta_title|default:page_title }}">
+<meta name="twitter:description" content="{{ twitter_description|default:meta_description|default:APP_DESCRIPTION|truncate_seo:200 }}">
+{% if og_image %}
+<meta name="twitter:image" content="{{ og_image }}">
+{% elif seo_data.og_image %}
+<meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{{ seo_data.og_image.url }}">
+{% endif %}
+
+<!-- Additional SEO Tags -->
+<meta name="language" content="Persian">
+<meta name="revisit-after" content="7 days">
+<meta name="author" content="{{ APP_NAME }}">
+<meta name="generator" content="Django">
+
+<!-- Favicon -->
+<link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+<link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}">
+
+<!-- Preconnect for Performance -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">

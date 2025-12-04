@@ -1,0 +1,24 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /panel/
+Disallow: /dashboard/
+Disallow: /user/login/
+Disallow: /user/register/
+Disallow: /stack/
+Disallow: /purchase/
+Disallow: /search/?*
+Disallow: /*?page=*
+Disallow: /*?sort=*
+
+# Allow important pages
+Allow: /store/
+Allow: /posts/
+Allow: /about/
+Allow: /contact/
+
+# Sitemap
+Sitemap: {{ request.scheme }}://{{ request.get_host }}/sitemap.xml
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1

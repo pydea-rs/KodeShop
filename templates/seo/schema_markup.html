@@ -1,0 +1,66 @@
+{% load seo_tags %}
+
+<!-- Schema.org JSON-LD Markup -->
+{% if schema_markup %}
+    {% render_schema_markup schema_markup %}
+{% endif %}
+
+{% if seo_data.schema_markup %}
+    {% render_schema_markup seo_data.schema_markup %}
+{% endif %}
+
+<!-- Organization Schema (Global) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "{{ APP_NAME }}",
+  "url": "{{ request.scheme }}://{{ request.get_host }}",
+  "logo": "{{ request.scheme }}://{{ request.get_host }}{% static 'images/logo.png' %}",
+  "description": "{{ APP_DESCRIPTION }}",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "customer service",
+    "availableLanguage": ["Persian", "English"]
+  },
+  "sameAs": [
+    "https://www.instagram.com/kodeshop",
+    "https://www.twitter.com/kodeshop"
+  ]
+}
+</script>
+
+<!-- Website Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "{{ APP_NAME }}",
+  "url": "{{ request.scheme }}://{{ request.get_host }}",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "{{ request.scheme }}://{{ request.get_host }}/search/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+
+{% if breadcrumbs %}
+<!-- Breadcrumb Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {% for item in breadcrumbs %}
+    {
+      "@type": "ListItem",
+      "position": {{ forloop.counter }},
+      "name": "{{ item.name }}",
+      "item": "{{ request.scheme }}://{{ request.get_host }}{{ item.url }}"
+    }{% if not forloop.last %},{% endif %}
+    {% endfor %}
+  ]
+}
+</script>
+{% endif %}

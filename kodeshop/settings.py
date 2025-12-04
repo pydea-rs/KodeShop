@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'purchase',
     'dashboard',
     'messaging',
+    'seo',  # SEO optimization module
     # 'gateways'
 ]
 
@@ -59,6 +60,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'seo.middleware.SEORedirectMiddleware',  # SEO redirects
+    'seo.middleware.SecurityHeadersMiddleware',  # Security headers for SEO
 
 ]
 # implement auto logout in case in activity for specific eriod of time
@@ -81,7 +84,8 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'category.context_processor.list_categories',
                 'stack.context_processor.stack_counter',
-                "kodeshop.context_processor.provide_app_constants"
+                "kodeshop.context_processor.provide_app_constants",
+                'seo.context_processors.seo_metadata',  # SEO context processor
             ],
         },
     },
@@ -150,6 +154,17 @@ EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
 # Robots config
 ROBOTS_USE_SITEMAP = True
 ROBOTS_USE_HOST = True
+
+# SEO Configuration
+SEO_SITE_NAME = config('SEO_SITE_NAME', default='KodeShop')
+SEO_SITE_DESCRIPTION = config('SEO_SITE_DESCRIPTION', default='فروشگاه آنلاین ابزار و تجهیزات کشاورزی')
+SEO_DEFAULT_IMAGE = '/static/images/og-default.jpg'
+SEO_TWITTER_HANDLE = config('SEO_TWITTER_HANDLE', default='@kodeshop')
+
+# Security Headers for SEO
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/

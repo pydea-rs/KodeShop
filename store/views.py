@@ -10,6 +10,9 @@ from django.db.models import Q
 from kodeshop.utils import PaginationParams
 
 def store(request, category_filter=None):
+    from django.contrib.contenttypes.models import ContentType
+    from seo.models import SEOMetadata
+    
     max_price = min_price = 0
     current_category = None
     filters = Q()
@@ -40,6 +43,28 @@ def store(request, category_filter=None):
 
     pagination = PaginationParams(request, Product, filters)
     products = pagination.get_items('created', order_descending=True)
+    
+    # SEO metadata
+    meta_title = 'فروشگاه - خرید آنلاین ابزار کشاورزی'
+    meta_description = 'خرید آنلاین ابزار و تجهیزات کشاورزی با بهترین قیمت و کیفیت'
+    breadcrumbs = [{'name': 'خانه', 'url': '/'}, {'name': 'فروشگاه', 'url': '/store/'}]
+    
+    if current_category:
+        meta_title = f"{current_category.name_fa} - خرید آنلاین"
+        meta_description = current_category.description if current_category.description else f"خرید {current_category.name_fa} با بهترین قیمت"
+        breadcrumbs.append({'name': current_category.name_fa, 'url': current_category.url()})
+        
+        # Get SEO metadata for category
+        content_type = ContentType.objects.get_for_model(current_category)
+        try:
+            seo_data = SEOMetadata.objects.get(content_type=content_type, object_id=current_category.id)
+            if seo_data.meta_title:
+                meta_title = seo_data.meta_title
+            if seo_data.meta_description:
+                meta_description = seo_data.meta_description
+        except SEOMetadata.DoesNotExist:
+            pass
+    
     context = {
         'products': products,
         'products_count': products.count() if products else 0,
@@ -48,22 +73,60 @@ def store(request, category_filter=None):
         'max_price': max_price,
         'min_price': min_price,
         'pagination': pagination,
+        'meta_title': meta_title,
+        'meta_description': meta_description,
+        'breadcrumbs': breadcrumbs,
     }
 
     return render(request, 'store/store.html', context)
 
 
 def product(request, category_filter, product_slug=None):
+    from seo.utils import generate_product_schema
+    from django.contrib.contenttypes.models import ContentType
+    from seo.models import SEOMetadata
+    
     context = dict()
     try:
         this_product = Product.objects.get(slug=product_slug, category__slug=category_filter)
         reviews = Review.objects.filter(product=this_product, status=True)
         gallery = Gallery.objects.filter(product=this_product)
+        
+        # Get or create SEO metadata
+        content_type = ContentType.objects.get_for_model(this_product)
+        try:
+            seo_data = SEOMetadata.objects.get(content_type=content_type, object_id=this_product.id)
+        except SEOMetadata.DoesNotExist:
+            seo_data = None
+        
+        # Generate schema markup
+        schema_markup = generate_product_schema(this_product)
+        
+        # Build breadcrumbs
+        breadcrumbs = [
+            {'name': 'خانه', 'url': '/'},
+            {'name': 'فروشگاه', 'url': '/store/'},
+            {'name': this_product.category.name_fa, 'url': this_product.category.url()},
+            {'name': this_product.name_fa, 'url': this_product.url()},
+        ]
+        
         context = {
             'this_product': this_product,
             'reviews': reviews,
             'gallery': gallery,
+            'meta_title': f"{this_product.name_fa} - خرید آنلاین",
+            'meta_description': this_product.description[:160] if this_product.description else f"خرید {this_product.name_fa} با بهترین قیمت و کیفیت",
+            'meta_keywords': f"{this_product.name_fa}, {this_product.category.name_fa}, خرید آنلاین",
+            'og_type': 'product',
+            'og_image': request.build_absolute_uri(this_product.image.url) if this_product.image else None,
+            'schema_markup': schema_markup,
+            'breadcrumbs': breadcrumbs,
+            'seo_data': seo_data,
         }
+        
+        # Set for context processor
+        request.seo_object = this_product
+        
     except Exception as ex:
         # handle this seriously
         raise ex

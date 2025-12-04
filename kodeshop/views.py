@@ -13,7 +13,10 @@ def home(request):
     context = {
         'popular_products': popular_products,
         'reviews': reviews,
-        'page_title': 'کالاهای پرطرفدار'
+        'page_title': 'کالاهای پرطرفدار',
+        'meta_title': 'KodeShop - فروشگاه آنلاین ابزار و تجهیزات کشاورزی',
+        'meta_description': 'خرید آنلاین ابزار کشاورزی، کود، سم و تجهیزات کشاورزی با بهترین قیمت و کیفیت. ارسال سریع به سراسر کشور',
+        'meta_keywords': 'ابزار کشاورزی, کود کشاورزی, سم کشاورزی, تجهیزات کشاورزی, خرید آنلاین',
     }
     return render(request, 'index.html', context)
 

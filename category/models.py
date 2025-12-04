@@ -7,12 +7,16 @@ from django.urls import reverse
 class Category(models.Model):
     name = models.CharField(max_length=30, blank=False, unique=True, verbose_name="نام دسته")
     name_fa = models.CharField(max_length=30, blank=False, unique=True, verbose_name="فارسی نام دسته")
-    slug = models.SlugField(max_length=30, unique=True, verbose_name="اسلاگ")
+    slug = models.SlugField(max_length=30, unique=True, verbose_name="اسلاگ", help_text="URL-friendly version")
     description = models.TextField(max_length=256, blank=True, verbose_name="توضیحات")
     icon = models.ImageField(upload_to='photos/categories/', blank=True, verbose_name="آیکون") # optional field
     branch_of = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True, verbose_name='زیرشاخه دسته بندی')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ایجاد")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="تاریخ به روز رسانی")
+    
+    # SEO fields
+    meta_title = models.CharField(max_length=60, blank=True, verbose_name="عنوان SEO")
+    meta_description = models.CharField(max_length=160, blank=True, verbose_name="توضیحات SEO")
 
     class Meta:
         verbose_name = "دسته بندی"
