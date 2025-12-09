@@ -22,7 +22,7 @@
                                     <a href="{{ product.url }}" class="img-wrap">
                                         <img style="width: 100%"
                                                 src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no-image.jpg' %}{% endif %}"
-                                                onerror="this.onerror=null; this.src='{% static 'img/no-image.jpg' %}"
+                                                onerror="onShowImageError(this)"
                                                 alt="خطا در بارگذاری تصویر"
                                         />
                                     </a>

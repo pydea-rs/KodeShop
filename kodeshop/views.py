@@ -33,7 +33,8 @@ def search(request):
             context = {
                 'popular_products': desired_products,
                 'reviews': reviews,
-                'page_title': 'نتایج'
+                'page_title': 'نتایج جستجو',
+                'meta_description': f'نتایج جستجو برای "{search_text}" در فروشگاه ابزار کشاورزی',
             }
             return render(request, 'index.html', context)
     except:
@@ -42,7 +43,11 @@ def search(request):
 
 
 def about_us(request):
-    return render(request, 'us/about.html')
+    context = {
+        'page_title': 'درباره ما',
+        'meta_description': 'آشنایی با فروشگاه آنلاین ابزار و تجهیزات کشاورزی KodeShop',
+    }
+    return render(request, 'us/about.html', context)
 
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt

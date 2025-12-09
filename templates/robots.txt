@@ -7,8 +7,6 @@ Disallow: /user/login/
 Disallow: /user/register/
 Disallow: /stack/
 Disallow: /purchase/
-Disallow: /search/?*
-Disallow: /*?page=*
 Disallow: /*?sort=*
 
 # Allow important pages

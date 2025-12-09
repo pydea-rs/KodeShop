@@ -73,7 +73,7 @@ def store(request, category_filter=None):
         'max_price': max_price,
         'min_price': min_price,
         'pagination': pagination,
-        'meta_title': meta_title,
+        'page_title': meta_title,
         'meta_description': meta_description,
         'breadcrumbs': breadcrumbs,
     }
@@ -114,6 +114,7 @@ def product(request, category_filter, product_slug=None):
             'this_product': this_product,
             'reviews': reviews,
             'gallery': gallery,
+            'page_title': f"{this_product.name_fa} - خرید آنلاین",
             'meta_title': f"{this_product.name_fa} - خرید آنلاین",
             'meta_description': this_product.description[:160] if this_product.description else f"خرید {this_product.name_fa} با بهترین قیمت و کیفیت",
             'meta_keywords': f"{this_product.name_fa}, {this_product.category.name_fa}, خرید آنلاین",

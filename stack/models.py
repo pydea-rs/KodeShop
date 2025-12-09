@@ -28,26 +28,21 @@ class Stack(models.Model):
     def submit_bill(self):  # stack_owner ==> request.user
         self.cost = self.discounts = 0
         try:
-            # if stack_owner.is_authenticated:
-            #    takens = TakenProduct.objects.all().filter(stack__belongs_to=stack_owner).filter(is_available=True)
-            # else:
-            #    takens = TakenProduct.objects.all().filter(stack=self).filter(is_available=True)
             takens = TakenProduct.objects.filter(stack=self, is_available=True)
-            # calculate costs:
+
             for taken in takens:
                 self.cost += taken.total_price()
                 self.discounts += taken.total_discount()
 
             self.save()
         except TakenProduct.DoesNotExist:
-            return {
-                'stack': self,
-                'taken_products': []
-            }
+            takens = []
 
         return {
             'stack': self,
-            'taken_products': takens
+            'taken_products': takens,
+            'page_title': 'سبد خرید شما',
+            'meta_description': 'سبد خرید  ابزار و تجهیزات کشاورزی کاربر',
         }
 
 

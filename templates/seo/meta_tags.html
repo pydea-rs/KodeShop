@@ -1,10 +1,13 @@
 {% load seo_tags %}
 {% load static %}
 
+{% with default_meta_description=meta_description|default_if_none:"" default_page_title=page_title|default_if_none:"" default_meta_title=meta_title|default_if_none:"" %}
+
 <!-- Primary Meta Tags -->
-<meta name="title" content="{{ meta_title|default:page_title|default:APP_NAME }}">
+<meta name="title" content="{{ meta_title|default:APP_NAME }}">
 <meta name="description" content="{{ meta_description|default:APP_DESCRIPTION|truncate_seo:160 }}">
-{% if meta_keywords %}<meta name="keywords" content="{{ meta_keywords }}">{% endif %}
+{% if meta_keywords %}
+<meta name="keywords" content="{{ meta_keywords }}">{% endif %}
 
 <!-- Canonical URL -->
 <link rel="canonical" href="{{ canonical_url|default:page_url }}">
@@ -19,8 +22,10 @@
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="{{ og_type|default:'website' }}">
 <meta property="og:url" content="{{ page_url }}">
-<meta property="og:title" content="{{ og_title|default:meta_title|default:page_title }}">
-<meta property="og:description" content="{{ og_description|default:meta_description|default:APP_DESCRIPTION|truncate_seo:200 }}">
+<meta property="og:title"
+    content="{{ og_title|default:default_meta_title|default:default_page_title|default:APP_NAME }}">
+<meta property="og:description"
+    content="{{ og_description|default:default_meta_description|default:APP_DESCRIPTION|truncate_seo:200 }}">
 {% if og_image %}
 <meta property="og:image" content="{{ og_image }}">
 {% elif seo_data.og_image %}
@@ -32,8 +37,10 @@
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:url" content="{{ page_url }}">
-<meta name="twitter:title" content="{{ twitter_title|default:meta_title|default:page_title }}">
-<meta name="twitter:description" content="{{ twitter_description|default:meta_description|default:APP_DESCRIPTION|truncate_seo:200 }}">
+<meta name="twitter:title"
+    content="{{ twitter_title|default:default_meta_title|default:default_page_title|default:APP_NAME }}">
+<meta name="twitter:description"
+    content="{{ twitter_description|default:default_meta_description|default:APP_DESCRIPTION|truncate_seo:200 }}">
 {% if og_image %}
 <meta name="twitter:image" content="{{ og_image }}">
 {% elif seo_data.og_image %}
@@ -53,3 +60,5 @@
 <!-- Preconnect for Performance -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+{% endwith %}

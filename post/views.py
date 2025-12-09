@@ -31,7 +31,7 @@ def show_blog(request, blog_id: int):
     
     context = {
         'blog': blog,
-        'meta_title': blog.title[:60],
+        'page_title': blog.title[:60],
         'meta_description': blog.summary if blog.summary else blog.title,
         'og_type': 'article',
         'og_image': request.build_absolute_uri(blog.thumbnail.url) if blog.thumbnail else None,
@@ -47,16 +47,36 @@ def show_blog(request, blog_id: int):
 
 def show_video(request, video_post_id: int):
     video = get_object_or_404(VideoPost, id=video_post_id)
-    return render(request, 'posts/video.html', {'video': video})
+    context = {
+        'video': video,
+        'page_title': video.title[:60],
+        'meta_description': video.summary if video.summary else video.title,
+        'og_type': 'video',
+    }
+    return render(request, 'posts/video.html', context)
 
 
 def list_blog_posts(request):
     pagination = PaginationParams(request, BlogPost)
     blogs = pagination.get_items('created_at', order_descending=True)
-    return render(request, 'posts/index.html', {'posts': blogs, 'pagination': pagination, })
+    context = {
+        'posts': blogs,
+        'pagination': pagination,
+        'page_title': 'بلاگ - مقالات کشاورزی',
+        'meta_title': 'بلاگ - مقالات و راهنمای کشاورزی',
+        'meta_description': 'مطالعه مقالات تخصصی کشاورزی، راهنمای استفاده از ابزار و تجهیزات کشاورزی',
+    }
+    return render(request, 'posts/index.html', context)
 
 
 def list_video_posts(request):
     pagination = PaginationParams(request, VideoPost)
     videos = pagination.get_items('created_at', order_descending=True)
-    return render(request, 'posts/index.html', {'posts': videos, 'pagination': pagination, })
+    context = {
+        'posts': videos,
+        'pagination': pagination,
+        'page_title': 'ویدیوهای آموزشی کشاورزی',
+        'meta_title': 'ویدیوهای آموزشی - راهنمای کشاورزی',
+        'meta_description': 'مشاهده ویدیوهای آموزشی کشاورزی، راهنمای استفاده از ابزار و تکنیک‌های کشاورزی',
+    }
+    return render(request, 'posts/index.html', context)

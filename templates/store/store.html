@@ -40,7 +40,7 @@
                                 </a>
                             </header>
 
-                            <div class="filter- content collapse show" id="collapse_1" style="">
+                            <div class="filter- content collapse show" id="collapse_1">
                                 <div class="card-body">
                                     <ul class="list-menu px-1">
                                         <li class="text-center"><a class="mx-auto btn expandable-button {% if current_category == None %}w-100 btn-outline-success{% else %}btn-outline-dark{% endif %}" href="{% url 'store' %}">همگی</a></li>
@@ -117,7 +117,7 @@
                                                 <a href="{{ product.url }}">
                                                     <img style="width: 100%"
                                                             src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no-image.jpg' %}{% endif %}"
-                                                            onerror="this.onerror=null; this.src='{% static 'img/no-image.jpg' %}"
+                                                            onerror="onShowImageError(this)"
                                                             alt="خطا در بارگذاری تصویر"
                                                     />
                                                 </a>

@@ -1,12 +1,13 @@
 {% load seo_tags %}
+{% load static %}
 
 <!-- Schema.org JSON-LD Markup -->
 {% if schema_markup %}
-    {% render_schema_markup schema_markup %}
+{% render_schema_markup schema_markup %}
 {% endif %}
 
 {% if seo_data.schema_markup %}
-    {% render_schema_markup seo_data.schema_markup %}
+{% render_schema_markup seo_data.schema_markup %}
 {% endif %}
 
 <!-- Organization Schema (Global) -->
