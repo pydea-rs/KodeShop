@@ -23,8 +23,8 @@
                     <div class="col-md-6">نام: <strong class="mx-5">{{ order.receiver }}</strong></div>
                     <div class="col-md-6">
                       آدرس:
-                      <strong class="mx-4"
-                        >{{ order.receiver.province }}, {{ order.receiver.city }}, {{ order.receiver.address }}
+                      <strong class="mx-4">
+                        {{ order.receiver.province }}, {{ order.receiver.city }}, {{order.receiver.address }}
                       </strong>
                     </div>
                   </div>
@@ -42,11 +42,8 @@
               </div>
             </div>
             <!-- col-lg-6 end here -->
-            <strong
-              style="color: lightcoral; border-top: 1px dashed black; border-bottom: 1px solid royalblue"
-              class="w-100 my-5 py-4 text-center"
-              >مشخصات سفارش</strong
-            >
+            <strong style="color: lightcoral; border-top: 1px dashed black; border-bottom: 1px solid royalblue"
+              class="w-100 my-5 py-4 text-center">مشخصات سفارش</strong>
 
             <div class="col-lg-12" class="container my-4">
               <!-- col-lg-12 start here -->
@@ -76,8 +73,9 @@
                           <th colspan="2" class="text-center p-3">{{ order.cost }}</th>
                         </tr>
                         <tr>
-                          <th class="text-right p-4">تخفیفات</th>
-                          <th colspan="2" class="text-center p-3">{{ order.discounts }}-</th>
+                          <th class="text-right p-4">تخفیف</th>
+                          <th colspan="2" class="text-center p-3">
+                            {{ order.discounts }}{% if order.discounts > 0 %}-{% endif %}</th>
                         </tr>
                         <tr>
                           <th class="text-right p-4">هزینه ارسال</th>

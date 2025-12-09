@@ -104,9 +104,11 @@
           <dl class="dlist-align">
             <dt>تخفیف:</dt>
             {% if stack.discounts %}
-            <dd class="text-center text-danger">{{ stack.discounts | intcomma:False }}- &nbsp;تومان</dd>
+              <dd class="text-center text-danger">
+                {{ stack.discounts | intcomma:False }}{% if stack.discounts > 0 %}-{% endif %} &nbsp;تومان
+              </dd>
             {% else %}
-            <dd class="mx-5 text-center text-danger">-</dd>
+              <dd class="mx-5 text-center text-danger">-</dd>
             {% endif %}
           </dl>
           <dl class="dlist-align">

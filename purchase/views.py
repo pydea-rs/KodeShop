@@ -27,7 +27,7 @@ def finalize_order(request, order_key, method, status, reference_id=None, amount
                 # variations cannot be set like this, it must be set after .save() call
                 purchased_item.quantity = item.quantity
                 purchased_item.cost = item.total_price()
-                purchased_item.delivered = order.status == 'delivered'
+                purchased_item.delivered = order.status == "delivered"
                 purchased_item.save()
 
                 # **** NOTE ****
@@ -57,18 +57,18 @@ def finalize_order(request, order_key, method, status, reference_id=None, amount
             user_stack.delete()
             return order
         else:
-            print('No order has been found')
+            print("No order has been found")
     except Exception as ex:
-        print(f'sth went wrong while saving the transaction cause: {ex}')
+        print(f"sth went wrong while saving the transaction cause: {ex}")
         if order:
             order.save()
 
 
-@login_required(login_url='login')
+@login_required(login_url="login")
 def submit_order(request):
     try:
         if not request.user.is_authenticated:
-            return redirect('login')
+            return redirect("login")
 
         user = request.user
         user_stack = open_stack(request)
@@ -76,38 +76,40 @@ def submit_order(request):
         stack_items = TakenProduct.objects.filter(stack=user_stack)
         # use stack_items or add a quantity field to stack model?
         if stack_items.count() <= 0:
-            return redirect('store')
+            return redirect("store")
 
-        if request.method == 'POST':
+        if request.method == "POST":
             form = OrderForm(request.POST)
             if form.is_valid():
                 # first get the data posted by user
                 order = Order()
                 try:
-                    order.receiver = OrderReceiver.objects.get(related_to=user, phone=form.cleaned_data['phone'])
+                    order.receiver = OrderReceiver.objects.get(related_to=user, phone=form.cleaned_data["phone"])
                 except ObjectDoesNotExist:
                     order.receiver = OrderReceiver()
-                    order.receiver.phone = form.cleaned_data['phone']
+                    order.receiver.phone = form.cleaned_data["phone"]
                     order.receiver.related_to = user
 
-                order.receiver.fname = form.cleaned_data['fname']
-                order.receiver.lname = form.cleaned_data['lname']
-                order.receiver.postal_code = form.cleaned_data['postal_code']
-                order.receiver.province = form.cleaned_data['province']
-                order.receiver.city = form.cleaned_data['city']
-                order.receiver.address = form.cleaned_data['address']
+                order.receiver.fname = form.cleaned_data["fname"]
+                order.receiver.lname = form.cleaned_data["lname"]
+                order.receiver.postal_code = form.cleaned_data["postal_code"]
+                order.receiver.province = form.cleaned_data["province"]
+                order.receiver.city = form.cleaned_data["city"]
+                order.receiver.address = form.cleaned_data["address"]
 
                 order.receiver.save()
 
-                order.notes = form.cleaned_data['notes'] if 'notes' in form.cleaned_data and form.cleaned_data['notes'] else None
+                order.notes = (
+                    form.cleaned_data["notes"] if "notes" in form.cleaned_data and form.cleaned_data["notes"] else None
+                )
                 order.cost = user_stack.cost
                 order.discounts = user_stack.discounts
-                order.shipping_cost = 50000  # this is for test; ask pouya about this
+                order.shipping_cost = 50000  # TODO: Handle this cost!  # this is for test; ask pouya about this
                 order.how_much_to_pay()  # calculate the cose and update the order.must_be_paid
                 # update the ip of the user again just to make sure
 
                 order.buyer = user
-                order.buyer.ip = request.META.get('REMOTE_ADDR')
+                order.buyer.ip = request.META.get("REMOTE_ADDR")
                 order.buyer.save()
                 order.save()  # save object and create id field for it (to use in keygen)
                 order.key = order.keygen()
@@ -115,31 +117,31 @@ def submit_order(request):
                 # use Order.objects.get to make sure that the order is saved properly and retrievable
                 order = Order.objects.get(buyer=request.user, key=order.key)
                 context = {
-                    'order': order,
-                    'goods': stack_items,
+                    "order": order,
+                    "goods": stack_items,
                 }
-                return render(request, 'purchase/preview.html', context)
+                return render(request, "purchase/preview.html", context)
     except Exception as ex:
-        print('sth went wrong while processing the order cause: ' + ex.__str__())
+        print("sth went wrong while processing the order cause: " + ex.__str__())
 
-    return redirect('order')
+    return redirect("order")
 
 
-@login_required(login_url='login')
+@login_required(login_url="login")
 def preview(request):
-    return render(request, 'purchase/preview.html')
+    return render(request, "purchase/preview.html")
 
 
-@login_required(login_url='login')
+@login_required(login_url="login")
 def check_order(request, order_key):
-    order = finalize_order(request=request, order_key=order_key, method='receipt', status='pending')
+    order = finalize_order(request=request, order_key=order_key, method="receipt", status="pending")
     if order and order.status.lower() == "pending":
         # now we send the user to transaction page
 
         return redirect(order.receipt_url())
         # return render(request, 'purchase/receipt.html', context)
     # sth went wrong: HANDLE ERROR
-    return render(request, 'purchase/preview.html')
+    return render(request, "purchase/preview.html")
 
 
 # ACTUALLY THIS METHOD MUST BE CALLED BY ADMIN SIDE
@@ -156,27 +158,31 @@ def accept_order(request, order_key):
         # send proper error
     except Exception as ex:
         order = None
-        print('sth went wrong while showing the order final details: ' + ex.__str__())
-    return render(request, 'purchase/result.html', {"order": order})
+        print("sth went wrong while showing the order final details: " + ex.__str__())
+    return render(request, "purchase/result.html", {"order": order})
 
 
-@login_required(login_url='login')
+@login_required(login_url="login")
 def take_receipt(request, order_key):
     user = request.user
     if user and user.is_authenticated:
         order = Order.objects.get(buyer=user, key=order_key)
         if order:
-            context = {'order': order}
-            return render(request, 'purchase/receipt.html', context)
-    return render(request, 'purchase/receipt.html')
+            context = {"order": order}
+            return render(request, "purchase/receipt.html", context)
+    return render(request, "purchase/receipt.html")
 
 
 def reserve_order(request):
     if request.method == "POST":
         form = ReserveTransactionForm(request.POST, request.FILES)
         if form.is_valid():
-            receipt = Receipt(reference_id=form.cleaned_data['reference_id'], image=form.cleaned_data['image'],
-                              amount=form.cleaned_data['amount'], order_key=form.cleaned_data['order_key'])
+            receipt = Receipt(
+                reference_id=form.cleaned_data["reference_id"],
+                image=form.cleaned_data["image"],
+                amount=form.cleaned_data["amount"],
+                order_key=form.cleaned_data["order_key"],
+            )
             receipt.save()
             transaction = Transaction(performer=request.user, method="reserve", validation="pending", receipt=receipt)
             transaction.save()
@@ -185,4 +191,4 @@ def reserve_order(request):
                 order.transaction = transaction
                 order.save()
             return redirect(order.accept_url())
-        return redirect('home')
+        return redirect("home")

@@ -3,7 +3,7 @@ from .models import OrderReceiver, Receipt
 
 
 class OrderForm(forms.ModelForm):
-    notes = forms.CharField(widget=forms.Textarea())
+    notes = forms.CharField(widget=forms.Textarea(), required=False)
 
     class Meta:
         model = OrderReceiver
@@ -16,7 +16,6 @@ class OrderForm(forms.ModelForm):
     def clean(self):
         # get sent form's data to start checking
         cleaned_data = super(OrderForm, self).clean()
-        print('OrderForm clean method has been called')
         # InputValidator.full(cleaned_data)
 
 
